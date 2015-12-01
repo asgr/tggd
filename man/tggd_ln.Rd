@@ -84,11 +84,11 @@ r <- rtggd_ln(20)
 qtggd_ln(ptggd_ln(r))-r
 
 #These should be the same:
-integrate(dtggd_ln,lower=10,upper=11,a=-1.5,b=0.7,xmin=10)
-ptggd_ln(11,a=-1.5,b=0.7,xmin=10)
+integrate(dtggd_ln,lower=log(1e10),upper=log(1e11),a=-1.5,b=0.7,xmin=log(1e10))
+ptggd_ln(log(1e11),a=-1.5,b=0.7,xmin=log(1e10))
 
 #This should be very close to 1 (for a true PDF):
-ptggd_ln(18,a=-1.5,b=0.7,xmin=10)
+ptggd_ln(log(1e18),a=-1.5,b=0.7,xmin=log(1e10))
 }
 \keyword{ ~tggd_ln }
 \keyword{ ~distribution }
