@@ -17,7 +17,7 @@ dtggd_log = function(x, scale=14, a=-1, b=1, xmin=10, log=FALSE){
 dtggd_ln = function(x, scale=log(1e14), a=-1, b=1, xmin=log(1e10), log=FALSE){
   xtran=exp(x-scale)
   xmintran=exp(xmin-scale)
-  d = b*(xtran^(a)*exp(-xtran^b))/gamma_inc((a+1)/b,xmintran^b)
+  d = b*(xtran^(a+1)*exp(-xtran^b))/gamma_inc((a+1)/b,xmintran^b)
   if(log){d=log(d)}
   return(d)
 }

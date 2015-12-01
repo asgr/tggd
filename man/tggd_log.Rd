@@ -14,7 +14,8 @@ Density, distribution function, quantile function and random generation for the 
 \usage{
 dtggd_log(x, scale=14, a=-1, b=1, xmin=10, log = FALSE)
 ptggd_log(q, scale=14, a=-1, b=1, xmin=10, lower.tail = TRUE, log.p = FALSE)
-qtggd_log(p, scale=14, a=-1, b=1, xmin=10, lower.tail = TRUE, log.p = FALSE, res.approx=1e-2)
+qtggd_log(p, scale=14, a=-1, b=1, xmin=10, lower.tail = TRUE, log.p = FALSE,
+res.approx=1e-2)
 rtggd_log(n, scale=14, a=-1, b=1, xmin=10, res.approx=1e-2)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -43,9 +44,19 @@ Vector of values for xmin, which controls the lower limit at which to trancate t
   \item{res.approx}{
 The resolution used to create the inverted CDF required to map probability integrals back onto quantiles.
 }
+  \item{log, log.p}{
+Logical; if TRUE, probabilities/densities p are returned as log(p).
+}
+  \item{lower.tail}{
+Logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x].
+}
 }
 \details{
-This distribution function is described in detail in Murray, Robotham and Power 2016.
+This distribution function is described in detail in Murray, Robotham and Power 2016. The PDF is given by:
+
+\deqn{f(x;a,b,s,m) = \frac{\ln(10).b (10^{(x-s)})^{(a+1)} \exp(-10^{(b(x-s))})}{s \Gamma(\frac{a+1}{b},(10^{(m-s)})^b)}}{f(x;a,b,s,m) = (ln(10).b.(10^(x-scale))^(a+1).exp(-10^(b(x-s))))/gamma_inc((a+1)/b,(10^(m-s))^b)}
+
+where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
 }
 \value{
 dtggd_log gives the density, ptggd_log gives the distribution function, qtggd_log gives the quantile function, and rtggd_log generates random deviates.
@@ -62,12 +73,6 @@ Murray, Robotham and Power (2016)
 \author{
 Aaron Robotham
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
 \code{\link{GammaDist}} regarding the Gamma distribution.
 \code{\link{RNG}} about random number generation in R.
@@ -84,6 +89,6 @@ ptggd_log(11,a=-1.5,b=0.7,xmin=10)
 
 #This should be very close to 1 (for a true PDF):
 ptggd_log(18,a=-1.5,b=0.7,xmin=10)
-
+}
 \keyword{ ~tggd_log }
 \keyword{ ~distribution }

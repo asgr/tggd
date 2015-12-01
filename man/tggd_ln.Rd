@@ -14,7 +14,8 @@ Density, distribution function, quantile function and random generation for the 
 \usage{
 dtggd_ln(x, scale=log(1e14), a=-1, b=1, xmin=log(1e10), log = FALSE)
 ptggd_ln(q, scale=log(1e14), a=-1, b=1, xmin=log(1e10), lower.tail = TRUE, log.p = FALSE)
-qtggd_ln(p, scale=log(1e14), a=-1, b=1, xmin=log(1e10), lower.tail = TRUE, log.p = FALSE, res.approx=1e-2)
+qtggd_ln(p, scale=log(1e14), a=-1, b=1, xmin=log(1e10), lower.tail = TRUE, log.p = FALSE,
+res.approx=1e-2)
 rtggd_ln(n, scale=log(1e14), a=-1, b=1, xmin=log(1e10), res.approx=1e-2)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -43,9 +44,19 @@ Vector of values for xmin, which controls the lower limit at which to trancate t
   \item{res.approx}{
 The resolution used to create the inverted CDF required to map probability integrals back onto quantiles.
 }
+  \item{log, log.p}{
+Logical; if TRUE, probabilities/densities p are returned as log(p).
+}
+  \item{lower.tail}{
+Logical; if TRUE (default), probabilities are P[X <= x], otherwise, P[X > x].
+}
 }
 \details{
 This distribution function is described in detail in Murray, Robotham and Power 2016.
+
+\deqn{f(x;a,b,s,m) = \frac{b \exp((x-s)^{(a+1)}) \exp(-\exp(b(x-s)))}{s \Gamma(\frac{a+1}{b},\exp(m-s)^b)}}{f(x;a,b,s,m) = (b.exp(x-s)^(a+1).exp(-exp(b(x-s))))/gamma_inc((a+1)/b,exp(m-s)^b)}
+
+where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
 }
 \value{
 dtggd_ln gives the density, ptggd_ln gives the distribution function, qtggd_ln gives the quantile function, and rtggd_ln generates random deviates.
@@ -60,14 +71,8 @@ The numerical arguments other than n are recycled to the length of the result. O
 Murray, Robotham and Power (2016)
 }
 \author{
-Aaron Robotham
+Aaron Robotham, Steven Murray
 }
-\note{
-%%  ~~further notes~~
-}
-
-%% ~Make other sections like Warning with \section{Warning }{....} ~
-
 \seealso{
 \code{\link{GammaDist}} regarding the Gamma distribution.
 \code{\link{RNG}} about random number generation in R.
@@ -84,6 +89,6 @@ ptggd_ln(11,a=-1.5,b=0.7,xmin=10)
 
 #This should be very close to 1 (for a true PDF):
 ptggd_ln(18,a=-1.5,b=0.7,xmin=10)
-
+}
 \keyword{ ~tggd_ln }
 \keyword{ ~distribution }
