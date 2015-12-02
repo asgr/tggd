@@ -1,11 +1,6 @@
 tggd
 ====
-
-The Standard Distribution Functions for the Truncated Generalised Gamma Distribution (see Murray, Robotham, Power (2016) [MRP]).
-
-Description
------------
-This small package provides the standard R distribution functions for the Truncated Generalised Gamma Distribution.
+This small package provides the standard R distribution functions for the Truncated Generalised Gamma Distribution  (see Murray, Robotham, Power (2016) [MRP]).
 
 Included are the density, CDF, quantile function and random generator, both for the real-space TGGD and log-space TGGD. 
 
@@ -25,12 +20,12 @@ Usage details are found by accessing the help files in the package, but are iden
 
 To understand *why* and *when* to use these functions, please refer to MRP. 
 
-We note in particular that the log-space forms of the functions are defined as the distributions of the log of the variates from the real-space distribution with identical parameters. This is the correct form to useif performing Bayesian analyses in which the values of the variates are uncertain with priors defined in log-space (eg. lognormal distributions).
+We note in particular that the log-space forms of the functions are defined as the distributions of the log of the variates from the real-space distribution with identical parameters. This is the correct form to use if performing Bayesian analyses in which the values of the variates are uncertain with priors defined in log-space (eg. lognormal distributions).
 
 Authors
 -------
-Aaron Robotham
-Steven Murray
+* Aaron Robotham
+* Steven Murray
 
 Version
 -------
