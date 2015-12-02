@@ -9,7 +9,7 @@
 The Truncated Generalised Gamma Distribution
 }
 \description{
-Density, distribution function, quantile function and random generation for the Truncated Generalised Gamma Distribution in log base 10 (log10) space.
+Density, distribution function, quantile function and random generation for the Truncated Generalised Gamma Distribution in log base 10 (log10) space. Specifically, if 10^x is drawn from a TGGD distribution (in real space), these functions give the distribution of x, using the same parameter values.
 }
 \usage{
 dtggd_log(x, scale=14, a=-1, b=1, xmin=10, log = FALSE)

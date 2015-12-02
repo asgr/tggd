@@ -9,7 +9,7 @@
 The Truncated Generalised Gamma Distribution
 }
 \description{
-Density, distribution function, quantile function and random generation for the Truncated Generalised Gamma Distribution in natural log (ln) space.
+Density, distribution function, quantile function and random generation for the Truncated Generalised Gamma Distribution in natural log (ln) space. Specifically, if exp(x) is drawn from a TGGD distribution (in real space), these functions give the distribution of x, using the same parameter values.
 }
 \usage{
 dtggd_ln(x, scale=log(1e14), a=-1, b=1, xmin=log(1e10), log = FALSE)
