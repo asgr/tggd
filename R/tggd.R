@@ -60,9 +60,9 @@ qtggd = function(p, scale=1e14, a=-1, b=1, xmin=1e10, lower.tail=TRUE, log.p=FAL
     logm = seq(log10(xmin), log10(mmax), res.approx)
     cdf = ptggd_log(q=logm, scale=log10(scale), a=a, b=b, xmin=log10(xmin), lower.tail=lower.tail)
     icdf = approxfun(cdf, logm)
+    if(log.p){p=exp(p)}
     p[p>1]=1
     p[p<0]=0
-    if(log.p){p=exp(p)}
     return(10^icdf(p))
 }
 
@@ -71,9 +71,9 @@ qtggd_log = function(p, scale=14, a=-1, b=1, xmin=10, lower.tail=TRUE, log.p=FAL
     logm = seq(xmin, mmax, res.approx)
     cdf = ptggd_log(q=logm, scale=scale, a=a, b=b, xmin=xmin, lower.tail=lower.tail)
     icdf = approxfun(cdf, logm)
+    if(log.p){p=exp(p)}
     p[p>1]=1
     p[p<0]=0
-    if(log.p){p=exp(p)}
     return(icdf(p))
 }
 
@@ -82,9 +82,9 @@ qtggd_ln = function(p, scale=log(1e14), a=-1, b=1, xmin=log(1e10), lower.tail=TR
     logm = seq(xmin/log(10), mmax/log(10), res.approx)
     cdf = ptggd_log(q=logm, scale=scale/log(10), a=a, b=b, xmin=xmin/log(10), lower.tail=lower.tail)
     icdf = approxfun(cdf, logm)
+    if(log.p){p=exp(p)}
     p[p>1]=1
     p[p<0]=0
-    if(log.p){p=exp(p)}
     return(icdf(p)*log(10))
 }
 
