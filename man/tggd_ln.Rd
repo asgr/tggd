@@ -73,6 +73,10 @@ Murray, Robotham and Power (2016)
 \author{
 Aaron Robotham, Steven Murray
 }
+\note{
+The intended application of the log-space version of the TGGD is to provide the correct distribution
+when variates are drawn from a real-space TGGD, but there are priors on their uncertainty which operate in logspace (eg. a lognormal distribution). The likelihood of a given set of parameters is incorrect in such a case if the real-space version is used without an adjustment to the Jacobian.
+}
 \seealso{
 \code{\link{GammaDist}} regarding the Gamma distribution.
 \code{\link{RNG}} about random number generation in R.
