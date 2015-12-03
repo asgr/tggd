@@ -1,11 +1,17 @@
-Version 0.1 (on CRAN):
+Version 0.1:
+
+This is first version submitted to CRAN 2015-12-02 (failed)
 
 Basic TGGD functions have been coded and checked.
 
 Documentation for TGGD has been written and checked.
 
-This is first version submitted to CRAN 2015-12-02
 
-Version 0.1.1:
+
+Version 0.1.1 (on CRAN):
+
+This is second version submitted to CRAN 2015-12-03
 
 Fixed the log.p arguments
+
+Added NAMESPACE info to fix some CRAN check notes
