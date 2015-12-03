@@ -69,6 +69,7 @@ The numerical arguments other than n are recycled to the length of the result. O
 }
 \references{
 Murray, Robotham and Power (2016)
+Baldry et al, 2012, MNRAS, 421, 621
 }
 \author{
 Aaron Robotham, Steven Murray
@@ -99,6 +100,26 @@ ptggd_log(18,a=-1.5,b=0.7,xmin=10)
 #outputs should be a sequence from 0 to 1 (by=0.1):
 ptggd_ln(log(qtggd(seq(0,1,by=0.1))))
 ptggd_ln(qtggd_log(seq(0,1,by=0.1))*log(10))
+
+#Make a traditional double Schechter galaxy stellar mass function down to a target
+#stellar mass of log10(SM)=8. Using data from Baldry (2012):
+#Component 1 has scale=10.66, a=-1.47, b=1, phi*=0.79e-3
+#Component 2 has scale=10.66, a=-0.35, b=1, phi*=3.96e-3
+#phi* is defined such that dtggd_log(M*,M*,a,b)=phi*.log(10).exp(-1) for any a and b
+#Relatively speaking, we can define new scaling values for sampling with:
+C1norm=0.79/dtggd_log(10.66,10.66,-1.47,1,xmin=8)
+C2norm=3.96/dtggd_log(10.66,10.66,-0.35,1,xmin=8)
+Ctot=C1norm+C2norm
+#Say we want to sample 1e6 galaxies, we can then do:
+GalSample=c(rtggd_log(1e6*C1norm/Ctot,10.66,-1.47,1,xmin=8),
+rtggd_log(1e6*C2norm/Ctot,10.66,-0.35,1,xmin=8))
+temp=hist(GalSample,breaks=seq(8,12,by=0.1))
+#We can then make a plot to compare to Fig 13 of Baldry (2012):
+plot(temp$mids,temp$counts,log='y')
+lines(seq(8,12,by=0.01),dtggd_log(seq(8,12,by=0.01),10.66,-1.47,1,xmin=8)*
+1e6*C1norm/Ctot/10,col='blue')
+lines(seq(8,12,by=0.01),dtggd_log(seq(8,12,by=0.01),10.66,-0.35,1,xmin=8)*
+1e6*C2norm/Ctot/10,col='red')
 }
 \keyword{ ~tggd_log }
 \keyword{ ~distribution }

@@ -15,3 +15,7 @@ This is second version submitted to CRAN 2015-12-03
 Fixed the log.p arguments
 
 Added NAMESPACE info to fix some CRAN check notes
+
+Version 0.1.2 (on GitHub):
+
+Added Baldry GSMF example in tggd_log
