@@ -144,7 +144,7 @@ dtggd_log(data,par[1],par[3],1,8)*(1-par[4])  #Contribution of mix 2 to the like
 GSMFfit=optim(par=c(10,-2,0,0.5), fn=mixlike, data=GalSample, hessian=TRUE)
 #The fit is probably not fantastic though. Generalised Gamma distributions (including
 #truncated ones) display poor convergence properties using ML. Full MCMC is a better
-#route when trying to fit GSMF type data. And the data certainly should *not() be binned!
+#route when trying to fit GSMF type data. And the data certainly should *not* be binned!
 
 #The maximum likelihood parameters:
 GSMFfit$par
