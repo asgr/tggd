@@ -101,25 +101,56 @@ ptggd_log(18,a=-1.5,b=0.7,xmin=10)
 ptggd_ln(log(qtggd(seq(0,1,by=0.1))))
 ptggd_ln(qtggd_log(seq(0,1,by=0.1))*log(10))
 
-#Make a traditional double Schechter galaxy stellar mass function down to a target
-#stellar mass of log10(SM)=8. Using data from Baldry (2012):
-#Component 1 has scale=10.66, a=-1.47, b=1, phi*=0.79e-3
-#Component 2 has scale=10.66, a=-0.35, b=1, phi*=3.96e-3
+\dontrun{
+#Here we make a double Schechter galaxy stellar mass function down to a target stellar
+#mass (xmin) of log10(SM)=8.
+
+#Using data from Baldry (2012):
+#Mixture 1 has M* (scale)=10.66, a=-1.47, b=1, phi*=0.79e-3
+#Mixture 2 has M* (scale)=10.66, a=-0.35, b=1, phi*=3.96e-3
+
 #phi* is defined such that dtggd_log(M*,M*,a,b)=phi*.log(10).exp(-1) for any a and b
 #Relatively speaking, we can define new scaling values for sampling with:
-C1norm=0.79/dtggd_log(10.66,10.66,-1.47,1,xmin=8)
-C2norm=3.96/dtggd_log(10.66,10.66,-0.35,1,xmin=8)
-Ctot=C1norm+C2norm
-#Say we want to sample 1e6 galaxies, we can then do:
-GalSample=c(rtggd_log(1e6*C1norm/Ctot,10.66,-1.47,1,xmin=8),
-rtggd_log(1e6*C2norm/Ctot,10.66,-0.35,1,xmin=8))
-temp=hist(GalSample,breaks=seq(8,12,by=0.1))
-#We can then make a plot to compare to Fig 13 of Baldry (2012):
+M1norm=0.79/dtggd_log(10.66,10.66,-1.47,1,xmin=8)
+M2norm=3.96/dtggd_log(10.66,10.66,-0.35,1,xmin=8)
+Mtot=C1norm+C2norm
+#Say we want to sample 1e5 galaxies, we can then do:
+Nsamp=1e5
+set.seed(100)
+GalSample=c(rtggd_log(Nsamp*M1norm/Mtot,10.66,-1.47,1,xmin=8),
+rtggd_log(Nsamp*M2norm/Mtot,10.66,-0.35,1,xmin=8))
+temp=hist(GalSample,breaks=seq(8,12,by=0.1), plot=FALSE)
+#We can then make a plot to compare to Fig 13 of Baldry (2012)
+#(the lines are approximate, using trapazoid integration for the bins):
 plot(temp$mids,temp$counts,log='y')
-lines(seq(8,12,by=0.01),dtggd_log(seq(8,12,by=0.01),10.66,-1.47,1,xmin=8)*
-1e6*C1norm/Ctot/10,col='blue')
-lines(seq(8,12,by=0.01),dtggd_log(seq(8,12,by=0.01),10.66,-0.35,1,xmin=8)*
-1e6*C2norm/Ctot/10,col='red')
+lines(seq(8,12,by=0.01), dtggd_log(seq(8,12,by=0.01),10.66,-1.47,1,xmin=8)*
+Nsamp*M1norm/Ctot/10,col='blue')
+lines(seq(8,12,by=0.01), dtggd_log(seq(8,12,by=0.01),10.66,-0.35,1,xmin=8)*
+Nsamp*M2norm/Ctot/10,col='red')
+lines(seq(8,12,by=0.01), dtggd_log(seq(8,12,by=0.01),10.66,-1.47,1,xmin=8)*
+Nsamp*M1norm/Ctot/10 + dtggd_log(seq(8,12,by=0.01),10.66,-0.35,1,xmin=8)*
+Nsamp*M2norm/Ctot/10,col='black')
+
+#Now we can try to fit the mixed model. The trick here is we fit for the mixture using
+#an additional parameter, where one component is multiplied by par[4] and the other
+#1-par[4]. We define it so C1norm/Ctot=par[4] and C1norm/Ctot=1-par[4] (hopfefully).
+
+mixlike=function(par,data){
+return(-sum(log(
+dtggd_log(data,par[1],par[2],1,8)*par[4]+     #Contribution of mix 1 to the likelihood
+dtggd_log(data,par[1],par[3],1,8)*(1-par[4])  #Contribution of mix 2 to the likelihood
+)))
+}
+GSMFfit=optim(par=c(10,-2,0,0.5), fn=mixlike, data=GalSample, hessian=TRUE)
+#The fit is probably not fantastic though. Generalised Gamma distributions (including
+#truncated ones) display poor convergence properties using ML. Full MCMC is a better
+#route when trying to fit GSMF type data. And the data certainly should *not() be binned!
+
+#The maximum likelihood parameters:
+GSMFfit$par
+#The marginal errors using the diagonal of the inverse hessian:
+sqrt(diag(solve(GSMFfit$hessian)))
+}
 }
 \keyword{ ~tggd_log }
 \keyword{ ~distribution }
