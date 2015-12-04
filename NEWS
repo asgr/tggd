@@ -19,3 +19,5 @@ Added NAMESPACE info to fix some CRAN check notes
 Version 0.1.2 (on GitHub):
 
 Added Baldry GSMF example in tggd_log
+
+Added modal information
