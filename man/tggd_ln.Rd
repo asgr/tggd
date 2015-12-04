@@ -4,6 +4,7 @@
 \alias{ptggd_ln}
 \alias{qtggd_ln}
 \alias{rtggd_ln}
+\alias{tggd_mode_ln}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 The Truncated Generalised Gamma Distribution

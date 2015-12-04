@@ -4,6 +4,7 @@
 \alias{ptggd_log}
 \alias{qtggd_log}
 \alias{rtggd_log}
+\alias{tggd_mode_log}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 The Truncated Generalised Gamma Distribution
