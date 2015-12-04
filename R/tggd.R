@@ -102,3 +102,15 @@ rtggd_ln = function(n, scale=log(1e14), a=-1, b=1, xmin=log(1e10), res.approx=1e
   if(length(n)>1){n=length(n)}
   return(qtggd_ln(runif(n), scale=scale, a=a, b=b, xmin=xmin, res.approx=res.approx))
 }
+
+tggd_mode=function(scale=1e14, a=-1, b=1){
+  if(a<= 0){return(-Inf)}else{return(scale*(a/b)^(1/b))}
+}
+
+tggd_mode_log=function(scale=14, a=-1, b=1){
+  if(a<= -1){return(-Inf)}else{return(scale+log10((a+1)/b)^(1/b))}
+}
+
+tggd_mode_ln=function(scale=log(1e14), a=-1, b=1){
+  if(a<= -1){return(-Inf)}else{return(scale+log((a+1)/b)^(1/b))}
+}

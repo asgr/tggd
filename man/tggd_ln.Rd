@@ -17,6 +17,7 @@ ptggd_ln(q, scale=log(1e14), a=-1, b=1, xmin=log(1e10), lower.tail = TRUE, log.p
 qtggd_ln(p, scale=log(1e14), a=-1, b=1, xmin=log(1e10), lower.tail = TRUE, log.p = FALSE,
 res.approx=1e-2)
 rtggd_ln(n, scale=log(1e14), a=-1, b=1, xmin=log(1e10), res.approx=1e-2)
+tggd_mode_ln(scale=log(1e14), a=-1, b=1)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -59,7 +60,7 @@ This distribution function is described in detail in Murray, Robotham and Power 
 where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
 }
 \value{
-dtggd_ln gives the density, ptggd_ln gives the distribution function, qtggd_ln gives the quantile function, and rtggd_ln generates random deviates.
+dtggd_ln gives the density, ptggd_ln gives the distribution function, qtggd_ln gives the quantile function, and rtggd_ln generates random deviates. tggd_mode_ln gives the location of the distribution mode.
 
 Invalid arguments will result in return value NaN, with a warning.
 
