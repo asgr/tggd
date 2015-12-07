@@ -103,7 +103,6 @@ ptggd_log(18,a=-1.5,b=0.7,xmin=10)
 ptggd_ln(log(qtggd(seq(0,1,by=0.1))))
 ptggd_ln(qtggd_log(seq(0,1,by=0.1))*log(10))
 
-\dontrun{
 #Here we make a double Schechter galaxy stellar mass function down to a target stellar
 #mass (xmin) of log10(SM)=8.
 
@@ -115,7 +114,7 @@ ptggd_ln(qtggd_log(seq(0,1,by=0.1))*log(10))
 #Relatively speaking, we can define new scaling values for sampling with:
 M1norm=0.79/dtggd_log(10.66,10.66,-1.47,1,xmin=8)
 M2norm=3.96/dtggd_log(10.66,10.66,-0.35,1,xmin=8)
-Mtot=C1norm+C2norm
+Mtot=M1norm+M2norm
 #Say we want to sample 1e5 galaxies, we can then do:
 Nsamp=1e5
 set.seed(100)
@@ -126,16 +125,16 @@ temp=hist(GalSample,breaks=seq(8,12,by=0.1), plot=FALSE)
 #(the lines are approximate, using trapazoid integration for the bins):
 plot(temp$mids,temp$counts,log='y')
 lines(seq(8,12,by=0.01), dtggd_log(seq(8,12,by=0.01),10.66,-1.47,1,xmin=8)*
-Nsamp*M1norm/Ctot/10,col='blue')
+Nsamp*M1norm/Mtot/10,col='blue')
 lines(seq(8,12,by=0.01), dtggd_log(seq(8,12,by=0.01),10.66,-0.35,1,xmin=8)*
-Nsamp*M2norm/Ctot/10,col='red')
+Nsamp*M2norm/Mtot/10,col='red')
 lines(seq(8,12,by=0.01), dtggd_log(seq(8,12,by=0.01),10.66,-1.47,1,xmin=8)*
-Nsamp*M1norm/Ctot/10 + dtggd_log(seq(8,12,by=0.01),10.66,-0.35,1,xmin=8)*
-Nsamp*M2norm/Ctot/10,col='black')
+Nsamp*M1norm/Mtot/10 + dtggd_log(seq(8,12,by=0.01),10.66,-0.35,1,xmin=8)*
+Nsamp*M2norm/Mtot/10,col='black')
 
 #Now we can try to fit the mixed model. The trick here is we fit for the mixture using
 #an additional parameter, where one component is multiplied by par[4] and the other
-#1-par[4]. We define it so C1norm/Ctot=par[4] and C1norm/Ctot=1-par[4] (hopfefully).
+#1-par[4]. We define it so M1norm/Mtot=par[4] and M1norm/Mtot=1-par[4] (hopfefully).
 
 mixlike=function(par,data){
 return(-sum(log(
@@ -152,7 +151,6 @@ GSMFfit=optim(par=c(10,-2,0,0.5), fn=mixlike, data=GalSample, hessian=TRUE)
 GSMFfit$par
 #The marginal errors using the diagonal of the inverse hessian:
 sqrt(diag(solve(GSMFfit$hessian)))
-}
 }
 \keyword{ ~tggd_log }
 \keyword{ ~distribution }
