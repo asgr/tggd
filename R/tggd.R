@@ -113,13 +113,31 @@ rtggd_ln = function(n, scale=log(1e14), a=-1, b=1, xmin=log(1e10), res.approx=1e
 }
 
 tggd_mode=function(scale=1e14, a=-1, b=1,xmin=1e10){
-  if(a<= 0){return(xmin)}else{return(scale*(a/b)^(1/b))}
+  if(a<= 0){
+    return(xmin)
+  }else if(a==0){
+    return(NaN)
+  }else{
+    return(scale*(a/b)^(1/b))
+  }
 }
 
 tggd_mode_log=function(scale=14, a=-1, b=1,xmin=10){
-  if(a<= -1){return(xmin)}else{return(scale+log10((a+1)/b)^(1/b))}
+  if(a<= -1){
+    return(xmin)
+  }else if(a==-1){
+    return(NaN)
+  }else{
+    return(scale+log10((a+1)/b)^(1/b))
+  }
 }
 
 tggd_mode_ln=function(scale=log(1e14), a=-1, b=1,xmin=log(1e10)){
-  if(a<= -1){return(xmin)}else{return(scale+log((a+1)/b)^(1/b))}
+  if(a<= -1){
+    return(xmin)
+  }else if(a==-1){
+    return(NaN)
+  }else{
+    return(scale+log((a+1)/b)^(1/b))
+  }
 }
