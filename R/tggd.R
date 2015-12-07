@@ -1,24 +1,33 @@
 dtggd = function(x, scale=1e14, a=-1, b=1, xmin=1e10, log=FALSE){
   xtran=x/scale
   xmintran=xmin/scale
-  d = b*(xtran^(a)*exp(-xtran^b))/(scale * gamma_inc((a+1)/b,xmintran^b))
-  if(log){d=log(d)}
+  if(log){
+    d = log(b) + a*log(xtran) - xtran^b - log(scale) - log(gamma_inc((a+1)/b,xmintran^b))
+  }else{
+    d = b*(xtran^(a)*exp(-xtran^b))/(scale * gamma_inc((a+1)/b,xmintran^b))
+  }
   return(d)
 }
 
 dtggd_log = function(x, scale=14, a=-1, b=1, xmin=10, log=FALSE){
   xtran=10^(x-scale)
   xmintran=10^(xmin-scale)
-  d = log(10)*b*(xtran^(a+1)*exp(-xtran^b))/gamma_inc((a+1)/b,xmintran^b)
-  if(log){d=log(d)}
+  if(log){
+    d = log(log(10)) + log(b) + (a+1)*(x-scale)*log(10) - xtran^b - log(gamma_inc((a+1)/b,xmintran^b))
+  }else{
+    d = log(10)*b*(xtran^(a+1)*exp(-xtran^b))/gamma_inc((a+1)/b,xmintran^b)
+  }
   return(d)
 }
 
 dtggd_ln = function(x, scale=log(1e14), a=-1, b=1, xmin=log(1e10), log=FALSE){
   xtran=exp(x-scale)
   xmintran=exp(xmin-scale)
-  d = b*(xtran^(a+1)*exp(-xtran^b))/gamma_inc((a+1)/b,xmintran^b)
-  if(log){d=log(d)}
+  if(log){
+    d = log(b) + (a+1)*(x-scale) - xtran^b - log(gamma_inc((a+1)/b,xmintran^b))
+  }else{
+    d = b*(xtran^(a+1)*exp(-xtran^b))/gamma_inc((a+1)/b,xmintran^b)
+  }
   return(d)
 }
 
@@ -103,14 +112,32 @@ rtggd_ln = function(n, scale=log(1e14), a=-1, b=1, xmin=log(1e10), res.approx=1e
   return(qtggd_ln(runif(n), scale=scale, a=a, b=b, xmin=xmin, res.approx=res.approx))
 }
 
-tggd_mode=function(scale=1e14, a=-1, b=1){
-  if(a<= 0){return(-Inf)}else{return(scale*(a/b)^(1/b))}
+tggd_mode=function(scale=1e14, a=-1, b=1,xmin=1e10){
+  if(a<= 0){
+    return(xmin)
+  }else if(a==0){
+    return(NaN)
+  }else{
+    return(scale*(a/b)^(1/b))
+  }
 }
 
-tggd_mode_log=function(scale=14, a=-1, b=1){
-  if(a<= -1){return(-Inf)}else{return(scale+log10((a+1)/b)^(1/b))}
+tggd_mode_log=function(scale=14, a=-1, b=1,xmin=10){
+  if(a<= -1){
+    return(xmin)
+  }else if(a==-1){
+    return(NaN)
+  }else{
+    return(scale+log10((a+1)/b)^(1/b))
+  }
 }
 
-tggd_mode_ln=function(scale=log(1e14), a=-1, b=1){
-  if(a<= -1){return(-Inf)}else{return(scale+log((a+1)/b)^(1/b))}
+tggd_mode_ln=function(scale=log(1e14), a=-1, b=1,xmin=log(1e10)){
+  if(a<= -1){
+    return(xmin)
+  }else if(a==-1){
+    return(NaN)
+  }else{
+    return(scale+log((a+1)/b)^(1/b))
+  }
 }
