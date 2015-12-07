@@ -18,7 +18,7 @@ ptggd_log(q, scale=14, a=-1, b=1, xmin=10, lower.tail = TRUE, log.p = FALSE)
 qtggd_log(p, scale=14, a=-1, b=1, xmin=10, lower.tail = TRUE, log.p = FALSE,
 res.approx=1e-2)
 rtggd_log(n, scale=14, a=-1, b=1, xmin=10, res.approx=1e-2)
-tggd_mode_log(scale=14, a=-1, b=1)
+tggd_mode_log(scale=14, a=-1, b=1, xmin=10)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

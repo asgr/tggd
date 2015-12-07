@@ -18,7 +18,7 @@ ptggd_ln(q, scale=log(1e14), a=-1, b=1, xmin=log(1e10), lower.tail = TRUE, log.p
 qtggd_ln(p, scale=log(1e14), a=-1, b=1, xmin=log(1e10), lower.tail = TRUE, log.p = FALSE,
 res.approx=1e-2)
 rtggd_ln(n, scale=log(1e14), a=-1, b=1, xmin=log(1e10), res.approx=1e-2)
-tggd_mode_ln(scale=log(1e14), a=-1, b=1)
+tggd_mode_ln(scale=log(1e14), a=-1, b=1, xmin=log(1e10))
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{

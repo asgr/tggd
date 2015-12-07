@@ -5,6 +5,7 @@
 \alias{qtggd}
 \alias{rtggd}
 \alias{tggd_mode}
+\alias{tggd_mean}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 The Truncated Generalised Gamma Distribution
@@ -18,7 +19,8 @@ ptggd(q, scale=1e14, a=-1, b=1, xmin=1e10, lower.tail = TRUE, log.p = FALSE)
 qtggd(p, scale=1e14, a=-1, b=1, xmin=1e10, lower.tail = TRUE, log.p = FALSE,
 res.approx=1e-2)
 rtggd(n, scale=1e14, a=-1, b=1, xmin=1e10, res.approx=1e-2)
-tggd_mode(scale=1e14, a=-1, b=1)
+tggd_mode(scale=1e14, a=-1, b=1, xmin=1e10)
+tggd_mean(scale=1e14, a=-1, b=1, xmin=1e10)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -61,7 +63,7 @@ This distribution function is described in detail in Murray, Robotham and Power 
 where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
 }
 \value{
-dtggd gives the density, ptggd gives the distribution function, qtggd gives the quantile function, and rtggd generates random deviates. tggd_mode gives the location of the distribution mode.
+dtggd gives the density, ptggd gives the distribution function, qtggd gives the quantile function, and rtggd generates random deviates. tggd_mode gives the location of the distribution mode. tggd_mean gives the location of the distribution mean.
 
 Invalid arguments will result in return value NaN, with a warning.
 
