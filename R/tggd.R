@@ -146,3 +146,13 @@ tggd_mean=function(scale=1e14, a=-1, b=1, xmin=1e10){
   xmintran=xmin/scale
   return(scale*gamma_inc((a+2)/b,xmintran^b)/gamma_inc((a+1)/b,xmintran^b))
 }
+
+tggd_var=function(scale=1e14, a=-1, b=1, xmin=1e10){
+  xmintran=xmin/scale
+  return(scale^2*((gamma_inc((a+3)/b,xmintran^b)/gamma_inc((a+1)/b,xmintran^b))-(gamma_inc((a+2)/b,xmintran^b)/gamma_inc((a+1)/b,xmintran^b))^2))
+}
+
+tggd_sd=function(scale=1e14, a=-1, b=1, xmin=1e10){
+  xmintran=xmin/scale
+  return(scale*sqrt((gamma_inc((a+3)/b,xmintran^b)/gamma_inc((a+1)/b,xmintran^b))-(gamma_inc((a+2)/b,xmintran^b)/gamma_inc((a+1)/b,xmintran^b))^2))
+}
