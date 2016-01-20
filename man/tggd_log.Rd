@@ -134,7 +134,7 @@ Nsamp*M2norm/Mtot/10,col='black')
 
 #Now we can try to fit the mixed model. The trick here is we fit for the mixture using
 #an additional parameter, where one component is multiplied by par[4] and the other
-#1-par[4]. We define it so M1norm/Mtot=par[4] and M1norm/Mtot=1-par[4] (hopfefully).
+#1-par[4]. We define it so M1norm/Mtot=par[4] and M1norm/Mtot=1-par[4] (hopefully).
 
 mixlike=function(par,data){
 return(-sum(log(
