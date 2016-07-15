@@ -110,10 +110,14 @@ ptggd_ln(qtggd_log(seq(0,1,by=0.1))*log(10))
 #Mixture 1 has M* (scale)=10.66, a=-1.47, b=1, phi*=0.79e-3
 #Mixture 2 has M* (scale)=10.66, a=-0.35, b=1, phi*=3.96e-3
 
-#phi* is defined such that dtggd_log(M*,M*,a,b)=phi*.log(10).exp(-1) for any a and b
+#phi* is defined such that: dtggd_log(M*,M*,a,b,xmin)=phi*.log(10).exp(-1)
+#for any a, b and xmin.
+
+#We want to fit for the ratio of phi*: 0.79/3.96=0.2
+
 #Relatively speaking, we can define new scaling values for sampling with:
-M1norm=0.79/dtggd_log(10.66,10.66,-1.47,1,xmin=8)
-M2norm=3.96/dtggd_log(10.66,10.66,-0.35,1,xmin=8)
+M1norm=0.2/dtggd_log(10.66,10.66,-1.47,1,xmin=8)
+M2norm=1/dtggd_log(10.66,10.66,-0.35,1,xmin=8)
 Mtot=M1norm+M2norm
 #Say we want to sample 1e5 galaxies, we can then do:
 Nsamp=1e5
@@ -134,7 +138,7 @@ Nsamp*M2norm/Mtot/10,col='black')
 
 #Now we can try to fit the mixed model. The trick here is we fit for the mixture using
 #an additional parameter, where one component is multiplied by par[4] and the other
-#1-par[4]. We define it so M1norm/Mtot=par[4] and M1norm/Mtot=1-par[4] (hopefully).
+#1-par[4]. We define it so M1norm/Mtot=par[4] and M1norm/Mtot=1-par[4].
 
 mixlike=function(par,data){
 return(-sum(log(
@@ -151,6 +155,13 @@ GSMFfit=optim(par=c(10,-2,0,0.5), fn=mixlike, data=GalSample, hessian=TRUE)
 GSMFfit$par
 #The marginal errors using the diagonal of the inverse hessian:
 sqrt(diag(solve(GSMFfit$hessian)))
+
+#The M1norm/Mtot mixture output is ~0.8.
+#To get back to original ratio of phi1*/phi2* (~0.2):
+
+(GSMFfit$par[4]*dtggd_log(10.66,10.66,-1.47,1,xmin=8))/
+((1-GSMFfit$par[4])*dtggd_log(10.66,10.66,-0.35,1,xmin=8))
+
 }
 \keyword{ ~tggd_log }
 \keyword{ ~distribution }
