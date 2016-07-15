@@ -162,6 +162,9 @@ sqrt(diag(solve(GSMFfit$hessian)))
 (GSMFfit$par[4]*dtggd_log(10.66,10.66,-1.47,1,xmin=8))/
 ((1-GSMFfit$par[4])*dtggd_log(10.66,10.66,-0.35,1,xmin=8))
 
+#In general the final phi* will still need a further global normalisation, e.g.
+#to count within a set window of stellar mass and volume (redshift and sky area).
+
 }
 \keyword{ ~tggd_log }
 \keyword{ ~distribution }
