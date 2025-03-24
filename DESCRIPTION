@@ -1,8 +1,8 @@
 Package: tggd
 Type: Package
 Title: The Standard Distribution Functions for the Truncated Generalised Gamma Distribution
-Version: 0.1.2
-Date: 2015-12-03
+Version: 0.1.3
+Date: 2025-03-24
 Author: Aaron Robotham, Steven Murray
 Maintainer: Aaron Robotham <aaron.robotham@uwa.edu.au>
 Description: Density, distribution function, quantile function and random generation for the Truncated Generalised Gamma Distribution (also in log10(x) and ln(x) space).

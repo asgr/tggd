@@ -64,7 +64,7 @@ This distribution function is described in detail in Murray, Robotham and Power 
 
 \deqn{f(x;a,b,s,m) = \frac{b({\frac{x}{s}})^a \exp(-({\frac{x}{s}})^b)}{s \Gamma(\frac{a+1}{b},(\frac{m}{s})^b)}}{f(x;a,b,s,m) = b.((x/s)^(a).exp(-(x/s)^b))/(s.gamma_inc((a+1)/b,(m/s)^b))}
 
-where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
+where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link[gsl]{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link[gsl]{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
 }
 \value{
 dtggd gives the density, ptggd gives the distribution function, qtggd gives the quantile function, and rtggd generates random deviates. tggd_mode gives the location of the distribution mode. tggd_mean gives the location of the distribution mean. tggd_var gives the value of the distribution variance. tggd_sd gives the value of the distribution standard deviation.
