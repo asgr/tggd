@@ -15,4 +15,3 @@ Description: Density, distribution function, quantile function and random genera
 License: GPL-3
 LazyData: TRUE
 Depends: R (>= 3.00), gsl
-                      

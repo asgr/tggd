@@ -136,6 +136,7 @@ lines(seq(8,12,by=0.01), dtggd_log(seq(8,12,by=0.01),10.66,-1.47,1,xmin=8)*
 Nsamp*M1norm/Mtot/10 + dtggd_log(seq(8,12,by=0.01),10.66,-0.35,1,xmin=8)*
 Nsamp*M2norm/Mtot/10,col='black')
 
+\dontrun{
 #Now we can try to fit the mixed model. The trick here is we fit for the mixture using
 #an additional parameter, where one component is multiplied by par[4] and the other
 #1-par[4]. We define it so M1norm/Mtot=par[4] and M1norm/Mtot=1-par[4].
@@ -164,7 +165,7 @@ sqrt(diag(solve(GSMFfit$hessian)))
 
 #In general the final phi* will still need a further global normalisation, e.g.
 #to count within a set window of stellar mass and volume (redshift and sky area).
-
+}
 }
 \keyword{ ~tggd_log }
 \keyword{ ~distribution }
