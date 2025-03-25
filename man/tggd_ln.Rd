@@ -58,7 +58,7 @@ This distribution function is described in detail in Murray, Robotham and Power 
 
 \deqn{f(x;a,b,s,m) = \frac{b \exp((x-s)^{(a+1)}) \exp(-\exp(b(x-s)))}{s \Gamma(\frac{a+1}{b},\exp(m-s)^b)}}{f(x;a,b,s,m) = (b.exp(x-s)^(a+1).exp(-exp(b(x-s))))/gamma_inc((a+1)/b,exp(m-s)^b)}
 
-where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
+where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link[gsl]{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link[gsl]{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
 }
 \value{
 dtggd_ln gives the density, ptggd_ln gives the distribution function, qtggd_ln gives the quantile function, and rtggd_ln generates random deviates. tggd_mode_ln gives the location of the distribution mode.

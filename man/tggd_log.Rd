@@ -58,7 +58,7 @@ This distribution function is described in detail in Murray, Robotham and Power 
 
 \deqn{f(x;a,b,s,m) = \frac{\ln(10).b (10^{(x-s)})^{(a+1)} \exp(-10^{(b(x-s))})}{s \Gamma(\frac{a+1}{b},(10^{(m-s)})^b)}}{f(x;a,b,s,m) = (ln(10).b.(10^(x-scale))^(a+1).exp(-10^(b(x-s))))/gamma_inc((a+1)/b,(10^(m-s))^b)}
 
-where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
+where, from the argument list above, we use x=x, a=a, b=b, s=scale and m=xmin. \eqn{\Gamma}{gamma_inc} is the upper incomplete Gamma function as defined by the gsl \code{\link[gsl]{gamma_inc}} function, using the same argument ordering, where \code{gamma_inc(a,x)==pgamma(x,a,lower=FALSE)*gamma(x)} for a>0. \code{\link[gsl]{gamma_inc}} is used because it allows for the computation of upper incomplete integrals in cases where a<=0.
 }
 \value{
 dtggd_log gives the density, ptggd_log gives the distribution function, qtggd_log gives the quantile function, and rtggd_log generates random deviates. tggd_mode_log gives the location of the distribution mode.
